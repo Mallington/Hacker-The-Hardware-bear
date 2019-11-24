@@ -27,40 +27,29 @@ class MotorFunction:
     def move(self, startFraction, endFraction, servo, min, max, duration):
         startPos = int((max - min) * startFraction + min)
         endPos = int((max - min) * endFraction + min)
-        delay = duration / ((endPos - startPos) / self.increment)
+        delay = duration / ((endPos - startPos+1) / self.increment)
 
         # print("Start: " + startPos + " End: " + endPos + " Delay:" + delay)
-        print("Delay:")
-        print(delay)
+       
         for x in range(startPos, endPos, self.increment):
-            print(x)
             time.sleep(delay)
             servo.angle = x
 
     def moveSwivel(self, start, end, time):
-        motorControl.move(
+        self.move(
             start, end, self.swivelServo, self.swivelArmMin, self.swivelArmMax, time,
         )
 
     def moveLeftArm(self, start, end, time):
-        motorControl.move(
+        self.move(
             start, end, self.leftServo, self.leftArmMin, self.leftArmMax, time,
         )
 
     def moveRightArm(self, start, end, time):
-        motorControl.move(
+        self.move(
             start, end, self.rightServo, self.rightArmMin, self.rightArmMax, time,
         )
-
-
-motorControl = MotorFunction()
-while True:
-
-    # motorControl.moveLeftArm(0, 1, 0.5)
-    # time.sleep(1
-
-    motorControl.moveLeftArm(0, 1, 0.6)
-    motorControl.moveRightArm(0, 1, 0.6)
-    time.sleep(1)
-    motorControl.moveSwivel(0, 1, 0.6)
-    time.sleep(1)
+    def clear(self):
+        self.leftServo.detach()
+        self.rightServo.detach()
+        self.swivelServo.detach()

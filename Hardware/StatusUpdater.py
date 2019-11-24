@@ -4,8 +4,8 @@ from RobotMoves import Moves
 URL = "http://192.168.43.187:8080/DanceMove"
 delay = 1
 
-
-
+move = Moves()
+move.clear()
 while True:
 	data = None
 	try:
@@ -17,12 +17,15 @@ while True:
 	if(data!= None):
 		if data == "Dance":
 			print("Dancing!")
-			move = Moves()
-			move.dance(3)
+			move.dance(2)
 			move.clear()
 		elif data == "Wave":
 			print("Waving")
+			move.wave(1)
+			move.clear()
 		elif data == "Cuddle":
+			move.cuddle(1)
+			move.clear()
 			print("Cuddling")
 	
 

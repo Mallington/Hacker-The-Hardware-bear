@@ -27,7 +27,9 @@ class MotorFunction:
     def move(self, startFraction, endFraction, servo, min, max, duration):
         startPos = int((max - min) * startFraction + min)
         endPos = int((max - min) * endFraction + min)
-        delay = duration / ((endPos - startPos+1) / self.increment)
+       
+
+        delay = duration / ((endPos - startPos+1.0) / self.increment)
 
         # print("Start: " + startPos + " End: " + endPos + " Delay:" + delay)
        

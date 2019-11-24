@@ -1,0 +1,3 @@
+GPIO 4 - Left Hand ()
+GPIO 17 - Right Hand ()
+GPIO 27 - Swivel (-180 to 180)

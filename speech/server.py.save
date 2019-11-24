@@ -1,0 +1,30 @@
+from flask import Flask, request
+from TextToSpeech import tts
+
+app = Flask(__name__)
+
+@app.route("/ping")
+def home():
+    return "Pong!"
+
+@app.route("/getText", methods=["POST"])
+def salvador():
+    resp = json.dumps(request.get_json())
+    my_json = resp.content.decode('utf-8')
+    #
+
+    # Load the JSON to a Python list & dump it back out as formatted JSON
+    escaped = my_json.replace("\'", "")
+    data = json.loads(escaped)
+    response = data["bear-text"]
+    speak(response)
+	# DO stuff here
+    return "Success"
+
+def speak(response):
+    speech = tts()
+    speech.say(response)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0")
+
